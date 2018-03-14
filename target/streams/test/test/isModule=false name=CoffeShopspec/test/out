@@ -1,7 +1,0 @@
-[0m[[0m[0minfo[0m] [0m[0m[32mCoffeShopspec:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mGrind beans[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  when nothing is given[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  - should return 'No beans provided!'[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  when Expresso beans given[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  - should return'Expresso beans grinded!' *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m    "[No beans provi]ded!" did not equal "[Expresso beans grin]ded!" (CoffeShopspec.scala:15)[0m[0m
