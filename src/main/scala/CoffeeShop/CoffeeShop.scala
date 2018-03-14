@@ -25,6 +25,15 @@ object CoffeeShop extends App {
     }
   }
 
+  case class Water(val temperature : Int = 40)
+    def heat(water: Water) : String ={
+      if (water.temperature == 40) {
+        "Water has not boiled"
+      } else{
+        "Water has boiled"
+      }
+    }
+
 }
 
 
