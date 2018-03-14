@@ -2,6 +2,12 @@
 object CoffeShop extends App {
 
 
-  def grindBeans : String = "No beans provided!"
+  def grindBeans(beans: String)  = {
 
+    if (beans == "Expresso Beans") {
+      "Expresso beans grinded!"
+    } else {
+      "No beans provided!"
+    }
+  }
 }
