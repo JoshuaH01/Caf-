@@ -1,5 +1,7 @@
-import CoffeeShop.{SemiSkimmedMilk, Water, WholeMilk}
+import CoffeeShop.{ArabicaBeans, SemiSkimmedMilk, Water, WholeMilk}
 import org.scalatest.{MustMatchers, WordSpec}
+
+import scala.xml.Null
 
 class CoffeeShopspec extends WordSpec with MustMatchers {
 
@@ -7,13 +9,13 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
     "nothing is given" should {
       "return 'No beans provided!'" in {
-        CoffeeShop.grindBeans("") mustEqual "No beans provided!"
+        CoffeeShop.grindBeans(None) mustEqual "No beans provided!"
       }
     }
 
     "Arabica beans given" should {
       "return'Ground Coffee'" in {
-        CoffeeShop.grindBeans("Arabica Beans") mustEqual "Ground Coffee"
+        CoffeeShop.grindBeans(Some (new ArabicaBeans)) mustEqual "Ground Coffee"
       }
     }
   }
@@ -53,5 +55,7 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
     }
   }
+
+
 
 }
