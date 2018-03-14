@@ -1,3 +1,4 @@
+import CoffeeShop.{SemiSkimmedMilk, WholeMilk}
 import org.scalatest.{MustMatchers, WordSpec}
 
 class CoffeeShopspec extends WordSpec with MustMatchers{
@@ -15,10 +16,24 @@ class CoffeeShopspec extends WordSpec with MustMatchers{
         CoffeeShop.grindBeans("Arabica Beans") mustEqual  "Ground Coffee"
       }
     }
+  }
 
+  "frothMilk" when {
 
+    "WholeMilk is given" should {
+      "return'Frothed Milk'" in {
+        CoffeeShop.frothMilk(new WholeMilk()) mustEqual "Frothed Milk"
+      }
+    }
 
+    "SemiSkimmedMilk is given" should {
+      "throw new exception in" in {
 
+        val caught = intercept[IllegalArgumentException] { CoffeeShop.frothMilk(new SemiSkimmedMilk)
+          }
+        assert(caught.getMessage == "Can not use Semi Skimmed Milk")
+      }
+    }
   }
 
 }
