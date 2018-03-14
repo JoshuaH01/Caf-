@@ -9,12 +9,15 @@ object CoffeeShop extends App {
   case class SemiSkimmedMilk() extends Milk
 
 
-  def grindBeans(beans: String) = {
+  trait CoffeeBeans
 
-    if (beans == "Arabica Beans") {
-      "Ground Coffee"
-    } else {
-      "No beans provided!"
+  case class ArabicaBeans() extends CoffeeBeans
+
+
+  def grindBeans(coffeeBeans: Option[CoffeeBeans]) : String = {
+    coffeeBeans match {
+      case Some(_ : ArabicaBeans)  => "Ground Coffee"
+      case _ => "No beans provided!"
     }
   }
 
@@ -34,6 +37,7 @@ object CoffeeShop extends App {
       }
     }
 
+/*  def BrewCoffee(water: Water, )*/
 }
 
 
