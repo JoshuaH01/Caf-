@@ -1,4 +1,4 @@
-import CoffeeShop.{SemiSkimmedMilk, WholeMilk}
+import CoffeeShop.{SemiSkimmedMilk, Water, WholeMilk}
 import org.scalatest.{MustMatchers, WordSpec}
 
 class CoffeeShopspec extends WordSpec with MustMatchers{
@@ -35,6 +35,16 @@ class CoffeeShopspec extends WordSpec with MustMatchers{
       }
     }
   }
+
+ "Heat" when {
+   
+   "Water has not boiled" should{
+     "return 'Water has not boiled " in{
+       CoffeeShop.heat(Water()) mustEqual "Water has not boiled"
+     }
+   }
+ }
+
 
 }
 
