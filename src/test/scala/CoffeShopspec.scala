@@ -24,7 +24,7 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
     "WholeMilk is given" should {
       "return'Frothed Milk'" in {
-        CoffeeShop.frothMilk(WholeMilk()) mustEqual "Frothed Milk"
+        CoffeeShop.frothMilk(WholeMilk()) mustEqual FrothedWholeMilk()
       }
     }
 
@@ -78,6 +78,10 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
     }
   }
 
+
+  "Coffee" when {
+
+  }
 
 
 }
