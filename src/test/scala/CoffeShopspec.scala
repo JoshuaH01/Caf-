@@ -1,6 +1,7 @@
 import CoffeeShop._
 import org.scalatest.{MustMatchers, WordSpec}
 
+import scala.util.{Failure, Success}
 import scala.xml.Null
 
 class CoffeeShopspec extends WordSpec with MustMatchers {
@@ -9,13 +10,13 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
     "nothing is given" should {
       "return 'No beans provided!'" in {
-        CoffeeShop.grindBeans(None) mustEqual "No beans provided!"
+        CoffeeShop.grindBeans(None) mustEqual Failure(new IllegalArgumentException("No beans provided!"))
       }
     }
 
     "Arabica beans given" should {
       "return'Ground Coffee'" in {
-        CoffeeShop.grindBeans(Some (new ArabicaBeans)) mustEqual "Ground Coffee"
+        CoffeeShop.grindBeans(Some (new ArabicaBeans)) mustEqual Success(GroundArabicaBeans())
       }
     }
   }
@@ -56,7 +57,7 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
     }
   }
 
-  "brewCoffee" when {
+/*  "brewCoffee" when {
 
     "Water is not 40" should {
       "throw new exception" in {
@@ -76,12 +77,12 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
 
     }
-  }
+  }*/
 
 
-  "Coffee" when {
+  /*"Coffee" when {
 
-  }
+  }*/
 
 
 }

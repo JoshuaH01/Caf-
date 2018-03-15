@@ -1,3 +1,4 @@
+import scala.util.{Failure, Success, Try}
 
 object CoffeeShop extends App {
 
@@ -9,20 +10,33 @@ object CoffeeShop extends App {
   case class SemiSkimmedMilk() extends Milk
   case class WholeMilk()extends Milk
 
+  case class Coffee(water: Water, coffeeBeans: CoffeeBeans, milk: Milk)
 
+  // Beans
   trait CoffeeBeans {
     val brand : String
   }
 
+  // Concrete loose beans
   case class ArabicaBeans() extends CoffeeBeans {
-    override val brand: String = "ArabicaBeans"
+    override val brand: String = "Arabica"
   }
 
 
-  def grindBeans(coffeeBeans: Option[CoffeeBeans]) : String = {
+  // Ground beans
+  abstract class GroundBeans() extends CoffeeBeans
+
+  // Concrete ground beans
+  case class GroundArabicaBeans() extends GroundBeans() {
+    override val brand = "Arabica"
+  }
+
+
+
+  def grindBeans(coffeeBeans: Option[CoffeeBeans]) : Try[GroundBeans] = {
     coffeeBeans match {
-      case Some(_ : ArabicaBeans)  => "Ground Coffee"
-      case _ => "No beans provided!"
+      case Some(_ : ArabicaBeans)  => Success(GroundArabicaBeans())
+      case _ => Failure(new IllegalArgumentException("No beans provided!"))
     }
   }
 
@@ -43,15 +57,20 @@ object CoffeeShop extends App {
     }
 
 
-    def brewCoffee(water: Water, coffeeBeans: CoffeeBeans) : String = {
-      (water.temperature, coffeeBeans) match {
-        case (w,c) if w > 40 && c.brand == "ArabicaBeans" => "Coffee"
-        case (w,_) if w <= 40 => throw new IllegalArgumentException("The water is to cold")
-        case (_,_) => "Error, you don't know how to make coffee"
+
+
+    def brewCoffee(water: Water, groundBeans: GroundBeans) : Coffee = {
+      (water.temperature, groundBeans) match {
+        case (w,c) if w > 40 && groundBeans == GroundArabicaBeans =>
+          Coffee(Water(100), ArabicaBeans(), FrothedWholeMilk())
+        case (w,_) if w <= 40 =>
+          throw new IllegalArgumentException("The water is to cold")
+        case (_,_) =>
+         throw new IllegalArgumentException ("Error, you don't know how to make coffee")
       }
 
-     /* case class Coffee(water: Water, coffeeBeans: CoffeeBeans, milk: Milk)*/
-
+//      val coffee = Coffee(Water(100), ArabicaBeans(), FrothedWholeMilk())
+//      coffee
     }
 
 
