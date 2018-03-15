@@ -42,14 +42,14 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
   "heat" when {
 
     "Water has not boiled" should {
-      "return 'Water has not boiled " in {
-        CoffeeShop.heat(Water()) mustEqual "Water has not boiled"
+      "return same instance of Water" in {
+        CoffeeShop.heat(Water(50)) mustEqual Water(50)
       }
     }
 
     "Water has boiled" should {
-      "return 'Water has boiled " in {
-        CoffeeShop.heat(Water(100)) mustEqual "Water has boiled"
+      "return new instance of water" in {
+        CoffeeShop.heat(Water(10)) mustEqual Water(60)
       }
 
 
