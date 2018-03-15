@@ -8,9 +8,10 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
   "grindBeans" when {
 
-    "nothing is given" should {
+    "no beans are provided" should {
       "return 'No beans provided!'" in {
-        CoffeeShop.grindBeans(None) mustEqual Failure(new IllegalArgumentException("No beans provided!"))
+        CoffeeShop.grindBeans(None) mustBe a[Failure[_]]
+        CoffeeShop.grindBeans(None) mustBe Failure(GrindingBeanException("No beans provided!"))
       }
     }
 
@@ -57,13 +58,13 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
     }
   }
 
-/*  "brewCoffee" when {
+  "brewCoffee" when {
 
     "Water is not 40" should {
       "throw new exception" in {
 
         val caught = intercept[IllegalArgumentException] {
-          CoffeeShop.brewCoffee(Water(30),new ArabicaBeans)
+          CoffeeShop.brewCoffee(Water(30),GroundArabicaBeans())
         }
         assert(caught.getMessage == "The water is to cold")
 
@@ -72,17 +73,17 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
     "Water is 40 and Arabica beans are added" should {
       "return 'Coffee " in {
-        CoffeeShop.brewCoffee(Water(50),new ArabicaBeans) mustEqual "Coffee"
+        CoffeeShop.brewCoffee(Water(50),GroundArabicaBeans()) mustEqual Coffee(Water(100), GroundArabicaBeans(), FrothedWholeMilk())
       }
-
-
     }
-  }*/
+  }
 
 
-  /*"Coffee" when {
+/*
+  "Coffee" when {
 
-  }*/
+  }
+*/
 
 
 }

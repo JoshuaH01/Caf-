@@ -13,7 +13,7 @@ object CoffeeShop extends App {
   case class Coffee(water: Water, coffeeBeans: CoffeeBeans, milk: Milk)
 
   // Beans
-  trait CoffeeBeans {
+  abstract class CoffeeBeans {
     val brand : String
   }
 
@@ -22,21 +22,21 @@ object CoffeeShop extends App {
     override val brand: String = "Arabica"
   }
 
-
   // Ground beans
   abstract class GroundBeans() extends CoffeeBeans
 
   // Concrete ground beans
-  case class GroundArabicaBeans() extends GroundBeans() {
+  case class GroundArabicaBeans() extends GroundBeans {
     override val brand = "Arabica"
   }
 
+  case class GrindingBeanException(message : String) extends Exception(message)
 
 
   def grindBeans(coffeeBeans: Option[CoffeeBeans]) : Try[GroundBeans] = {
     coffeeBeans match {
       case Some(_ : ArabicaBeans)  => Success(GroundArabicaBeans())
-      case _ => Failure(new IllegalArgumentException("No beans provided!"))
+      case _ => Failure(GrindingBeanException("No beans provided!"))
     }
   }
 
@@ -56,27 +56,19 @@ object CoffeeShop extends App {
       }
     }
 
-
-
-
     def brewCoffee(water: Water, groundBeans: GroundBeans) : Coffee = {
-      (water.temperature, groundBeans) match {
-        case (w,c) if w > 40 && groundBeans == GroundArabicaBeans =>
-          Coffee(Water(100), ArabicaBeans(), FrothedWholeMilk())
-        case (w,_) if w <= 40 =>
+      water.temperature match {
+        case (w) if w > 40  =>
+          Coffee(Water(100), groundBeans, FrothedWholeMilk())
+        case (w) if w <= 40 =>
           throw new IllegalArgumentException("The water is to cold")
-        case (_,_) =>
+        case (_) =>
          throw new IllegalArgumentException ("Error, you don't know how to make coffee")
       }
 
-//      val coffee = Coffee(Water(100), ArabicaBeans(), FrothedWholeMilk())
-//      coffee
+      val coffee = Coffee(Water(100), GroundArabicaBeans(), FrothedWholeMilk())
+      coffee
     }
-
-
-
-
-
 }
 
 
