@@ -9,9 +9,13 @@ object CoffeeShop extends App {
   case class SemiSkimmedMilk() extends Milk
 
 
-  trait CoffeeBeans
+  trait CoffeeBeans {
+    val brand : String
+  }
 
-  case class ArabicaBeans() extends CoffeeBeans
+  case class ArabicaBeans() extends CoffeeBeans {
+    override val brand: String = "ArabicaBeans"
+  }
 
 
   def grindBeans(coffeeBeans: Option[CoffeeBeans]) : String = {
@@ -28,7 +32,7 @@ object CoffeeShop extends App {
     }
   }
 
-  case class Water(val temperature : Int = 40)
+  case class Water(temperature : Int = 40)
     def heat(water: Water) : String ={
       if (water.temperature == 40) {
         "Water has not boiled"
@@ -37,7 +41,13 @@ object CoffeeShop extends App {
       }
     }
 
-/*  def BrewCoffee(water: Water, )*/
+    def brewCoffee(water: Water, coffeeBeans: CoffeeBeans) : String = {
+      (water.temperature, coffeeBeans) match {
+        case (w,c) if w > 40 && c.brand == "ArabicaBeans" => "Coffee"
+        case (w,_) if w <= 40 => throw new IllegalArgumentException("The water is to cold")
+        case (_,_) => "Error, you don't know how to make coffee"
+      }
+    }
 }
 
 
