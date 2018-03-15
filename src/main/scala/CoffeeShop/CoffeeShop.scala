@@ -4,9 +4,10 @@ object CoffeeShop extends App {
 
   trait Milk
 
-  case class WholeMilk() extends Milk
-
+  abstract class FrothedMilk() extends Milk
+  case class FrothedWholeMilk() extends FrothedMilk
   case class SemiSkimmedMilk() extends Milk
+  case class WholeMilk()extends Milk
 
 
   trait CoffeeBeans {
@@ -25,9 +26,9 @@ object CoffeeShop extends App {
     }
   }
 
-  def frothMilk(milk: Milk) : String = {
+  def frothMilk(milk: Milk) : FrothedMilk = {
     milk match {
-      case m : WholeMilk => "Frothed Milk"
+      case m : WholeMilk => new FrothedWholeMilk
       case _ : SemiSkimmedMilk => throw new IllegalArgumentException("Can not use Semi Skimmed Milk")
     }
   }
@@ -49,8 +50,14 @@ object CoffeeShop extends App {
         case (_,_) => "Error, you don't know how to make coffee"
       }
 
-      /*case class Coffee()*/
+     /* case class Coffee(water: Water, coffeeBeans: CoffeeBeans, milk: Milk)*/
+
     }
+
+
+
+
+
 }
 
 
