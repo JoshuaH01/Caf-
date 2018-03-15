@@ -33,13 +33,14 @@ object CoffeeShop extends App {
   }
 
   case class Water(temperature : Int = 40)
-    def heat(water: Water) : String ={
-      if (water.temperature == 40) {
-        "Water has not boiled"
-      } else{
-        "Water has boiled"
+    def heat(water: Water) : Water = {
+      if (water.temperature >= 40) {
+        water
+      } else {
+         Water(60)
       }
     }
+
 
     def brewCoffee(water: Water, coffeeBeans: CoffeeBeans) : String = {
       (water.temperature, coffeeBeans) match {
@@ -47,6 +48,8 @@ object CoffeeShop extends App {
         case (w,_) if w <= 40 => throw new IllegalArgumentException("The water is to cold")
         case (_,_) => "Error, you don't know how to make coffee"
       }
+
+      /*case class Coffee()*/
     }
 }
 
