@@ -1,6 +1,6 @@
 package CoffeeShop.models
 
-import CoffeeShop.CoffeeShop.{Coffee, GroundBeans, Water}
+import CoffeeShop.CoffeeShop.{Coffee, Water}
 
 
 case class CoffeeWithOutMilk(override val water: Water,

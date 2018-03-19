@@ -1,6 +1,8 @@
-import CoffeeShop._
+import CoffeeShop.CoffeeShop.{GrindingBeanException, Water}
+import CoffeeShop.models._
 import org.scalatest.{MustMatchers, WordSpec}
-import models._
+import CoffeeShop.CoffeeShop
+
 import scala.util.{Failure, Success}
 
 
@@ -17,7 +19,7 @@ class CoffeeShopspec extends WordSpec with MustMatchers {
 
     "Arabica beans given" should {
       "return'Ground Coffee'" in {
-        CoffeeShop.grindBeans(Some (new ArabicaBeans)) mustEqual Success(GroundCoffeeBeans())
+        CoffeeShop.grindBeans(Some (new ArabicaBeans)) mustEqual Success(GroundArabicaBeans())
       }
     }
   }
