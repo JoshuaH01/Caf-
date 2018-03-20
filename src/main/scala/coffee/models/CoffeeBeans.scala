@@ -1,4 +1,4 @@
-package CoffeeShop.models
+package coffee.models
 
 abstract class CoffeeBeans {
   val brand: String
