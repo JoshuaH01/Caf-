@@ -1,22 +1,29 @@
-package CoffeeShop
+package coffee.controllers
+
+import coffee.models._
 
 import scala.util.{Failure, Success, Try}
-import models._
 
-object CoffeeShop extends App {
+case class Water(temperature: Int = 40)
 
+abstract class Coffee(val water : Water, val groundBeans: GroundBeans)
 
-  case class Water(temperature: Int = 40)
+case class GrindingBeanException(message: String) extends Exception(message)
+case class BrewingException(message: String) extends Exception(message)
 
-  abstract class Coffee(val water : Water, val groundBeans: GroundBeans)
-
-  case class GrindingBeanException(message: String) extends Exception(message)
+object CafeMachine {
 
 
   def grindBeans(coffeeBeans: Option[CoffeeBeans]): Try[GroundBeans] = {
+
     coffeeBeans match {
-      case Some(_: ArabicaBeans) => Success(GroundArabicaBeans())
-      case _ => Failure(GrindingBeanException("No beans provided!"))
+      case Some(_: ArabicaBeans) =>
+        val gb = GroundArabicaBeans()
+        println(s"Here are some $gb")
+        Success(gb)
+      case _ =>
+
+        Failure(GrindingBeanException("No beans provided!"))
     }
   }
 
@@ -51,21 +58,4 @@ object CoffeeShop extends App {
     CoffeeWithMilk(w, coffee.groundBeans, milk)
   }
 
-
-  /// instantiate beans
-  // instatiate milk
-  // instantiate water
-  // heat water
-  // grind beans
-  // get coffee brewed
-  // if (wantMilk?) then {
-  //  froth milk as well
-  //  addMilk(coffee)
-  //}
-  // else return blackCoffee already brewed
-
-
 }
-
-
-
